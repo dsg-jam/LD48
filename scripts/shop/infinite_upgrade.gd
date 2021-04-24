@@ -19,7 +19,6 @@ func _ready() -> void:
 	_exp_a = float(price_start) / _exp_b
 
 	var level := _player_upgrades.levels.get(upgrade_key) as int
-	assert(level != null)
 
 	label_name.text = upgrade_name
 	_update_for_level(level)
