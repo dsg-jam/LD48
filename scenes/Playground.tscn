@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/background.png" type="Texture" id=1]
 [ext_resource path="res://prefabs/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/tiles.png" type="Texture" id=3]
 [ext_resource path="res://assets/midground.png" type="Texture" id=4]
+[ext_resource path="res://prefabs/enemies/Bully.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 80, 64, 0, 64, 0, 0, 80, 0 )
@@ -234,5 +235,8 @@ tile_set = SubResource( 7 )
 cell_size = Vector2( 80, 80 )
 format = 1
 tile_data = PoolIntArray( -131078, 3, 0, -196591, 2, 0, -65542, 3, 0, -131055, 2, 0, -6, 3, 0, -65519, 2, 0, 65530, 3, 0, 17, 2, 0, 131066, 3, 0, 65553, 2, 0, 196602, 3, 0, 131089, 2, 0, 262138, 3, 0, 196625, 2, 0, 327674, 3, 0, 262161, 2, 0, 393210, 3, 0, 327697, 2, 0, 458746, 3, 0, 393233, 2, 0, 524282, 3, 0, 458769, 2, 0, 589818, 3, 0, 524305, 2, 0 )
+
+[node name="Node2D2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 203, 351 )
 
 [editable path="Node2D"]

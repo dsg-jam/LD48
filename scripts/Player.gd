@@ -3,13 +3,13 @@ extends KinematicBody2D
 export (int) var speed = 200
 export (float) var friction = 0.01
 export (float) var acceleration = 0.02
+export (float) var health = 100.0
 
-
-var velocity = Vector2.ZERO
+var velocity := Vector2()
 var input_velocity := Vector2()
 
 func get_input():
-	input_velocity = Vector2.ZERO
+	input_velocity = Vector2()
 	if Input.is_action_pressed('right'):
 		input_velocity.x += 2
 	if Input.is_action_pressed('left'):
@@ -24,12 +24,9 @@ func get_input():
 func calculate_velocity() -> Vector2:
 	if input_velocity.length() > 0:
 		return velocity.linear_interpolate(input_velocity, acceleration)
-	return velocity.linear_interpolate(Vector2.ZERO, friction)
-
-func _ready():
-	pass # Replace with function body.
+	return velocity.linear_interpolate(Vector2(), friction)
 
 
-func _process(delta):
+func _physics_process(delta):
 	get_input()
 	velocity = move_and_slide(calculate_velocity())
