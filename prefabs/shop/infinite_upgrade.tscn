@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/shop/infinite_upgrade.gd" type="Script" id=1]
+
+[node name="InfiniteUpgrade" type="HBoxContainer"]
+margin_right = 1002.0
+margin_bottom = 20.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="."]
+margin_top = 3.0
+margin_right = 39.0
+margin_bottom = 17.0
+text = "speed"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="."]
+margin_left = 43.0
+margin_right = 923.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="CurrentLevel" type="Label" parent="."]
+margin_left = 927.0
+margin_top = 3.0
+margin_right = 935.0
+margin_bottom = 17.0
+text = "1"
+
+[node name="UpgradeButton" type="Button" parent="."]
+margin_left = 939.0
+margin_right = 1002.0
+margin_bottom = 20.0
+text = "upgrade"
+__meta__ = {
+"_edit_use_anchors_": false
+}
