@@ -44,6 +44,7 @@ shape = SubResource( 1 )
 position = Vector2( 8, 2 )
 scale = Vector2( 2.65625, 2.65625 )
 frames = SubResource( 6 )
+frame = 3
 playing = true
 offset = Vector2( -3.01176, -0.752941 )
 

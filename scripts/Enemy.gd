@@ -1,11 +1,20 @@
 extends KinematicBody2D
 
-export (int) var speed = 15
+export (int) var idle_speed := 15
+export (int) var hunting_speed := 20
+
+export (float) var idle_acceleration := 0.02
+export (float) var hunting_acceleration := 0.04
+
 export (float) var friction = 0.01
-export (float) var acceleration = 0.02
 export (float) var health = 100.0
 
+export (float) var bounce_rate = 50.0
+
 onready var sprite := $AnimatedSprite
+
+var speed := idle_speed
+var acceleration := idle_acceleration
 var velocity := Vector2()
 var input_velocity := Vector2()
 var vertical_velocity := 0.0
@@ -47,11 +56,16 @@ func _physics_process(delta):
 		sprite.set_flip_h(false)
 		self.rotation = velocity.angle()
 	
-	var collision_info = move_and_collide(velocity * speed * delta)
-	if collision_info:
-		direction *= -1
-		velocity.x *= -1
-		sprite.set_flip_h(!sprite.flip_h)
+	var collision = move_and_collide(velocity * speed * delta)
+	
+	if collision:
+		if collision.collider.name == "Player":
+			velocity = velocity.bounce(collision.normal).normalized() * bounce_rate
+			
+		else:
+			direction *= -1
+			velocity.x *= -1
+			sprite.set_flip_h(!sprite.flip_h)
 
 
 func _on_Timer_timeout():
@@ -64,8 +78,12 @@ func _on_PlayerDetectionArea_body_entered(body):
 	if body.name == "Player":
 		player = body
 		is_hunting = true
+		speed = hunting_speed
+		acceleration = hunting_acceleration
 
 
 func _on_PlayerDetectionArea_body_exited(body):
 	if body.name == "Player":
 		is_hunting = false
+		speed = idle_speed
+		acceleration = idle_acceleration
