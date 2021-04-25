@@ -102,33 +102,31 @@ height = 23.2998
 [sub_resource type="CircleShape2D" id=21]
 radius = 92.2212
 
-[node name="PlayerNode" type="Node2D"]
-
-[node name="Player" type="KinematicBody2D" parent="."]
+[node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="."]
 current = true
 smoothing_enabled = true
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 19 )
 animation = "idle"
-frame = 2
+frame = 4
 playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 7.77859, 2.8286 )
 shape = SubResource( 20 )
 
-[node name="DamageTimer" type="Timer" parent="Player"]
+[node name="DamageTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="CoinDetectionArea" type="Area2D" parent="Player"]
+[node name="CoinDetectionArea" type="Area2D" parent="."]
 
-[node name="CoinDetection" type="CollisionShape2D" parent="Player/CoinDetectionArea"]
+[node name="CoinDetection" type="CollisionShape2D" parent="CoinDetectionArea"]
 shape = SubResource( 21 )
 
-[connection signal="timeout" from="Player/DamageTimer" to="Player" method="_on_DamageTimer_timeout"]
-[connection signal="area_entered" from="Player/CoinDetectionArea" to="Player" method="_on_CoinDetectionArea_area_entered"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_DamageTimer_timeout"]
+[connection signal="area_entered" from="CoinDetectionArea" to="." method="_on_CoinDetectionArea_area_entered"]

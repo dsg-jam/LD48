@@ -27,18 +27,19 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 21, 28 )
 
-[sub_resource type="CircleShape2D" id=7]
-radius = 441.502
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 173.0
+height = 438.0
 
-[node name="Node2D" type="Node2D"]
-
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+[node name="KinematicBody2D" type="KinematicBody2D" groups=[
+"destroyable",
+]]
 script = ExtResource( 2 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 8, 2 )
 scale = Vector2( 2.65625, 2.65625 )
 frames = SubResource( 5 )
@@ -46,20 +47,21 @@ frame = 3
 playing = true
 offset = Vector2( -3.01176, -0.752941 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -7, 5 )
 rotation = 1.5708
-shape = SubResource( 8 )
+shape = SubResource( 6 )
 
-[node name="VerticalTimer" type="Timer" parent="KinematicBody2D"]
+[node name="VerticalTimer" type="Timer" parent="."]
 process_mode = 0
 autostart = true
 
-[node name="PlayerDetectionArea" type="Area2D" parent="KinematicBody2D"]
+[node name="PlayerDetectionArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/PlayerDetectionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea"]
+rotation = 1.5708
 shape = SubResource( 7 )
 
-[connection signal="timeout" from="KinematicBody2D/VerticalTimer" to="KinematicBody2D" method="_on_Timer_timeout"]
-[connection signal="body_entered" from="KinematicBody2D/PlayerDetectionArea" to="KinematicBody2D" method="_on_PlayerDetectionArea_body_entered"]
-[connection signal="body_exited" from="KinematicBody2D/PlayerDetectionArea" to="KinematicBody2D" method="_on_PlayerDetectionArea_body_exited"]
+[connection signal="timeout" from="VerticalTimer" to="." method="_on_Timer_timeout"]
+[connection signal="body_entered" from="PlayerDetectionArea" to="." method="_on_PlayerDetectionArea_body_entered"]
+[connection signal="body_exited" from="PlayerDetectionArea" to="." method="_on_PlayerDetectionArea_body_exited"]

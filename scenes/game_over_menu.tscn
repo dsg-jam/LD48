@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/game_over_control.gd" type="Script" id=1]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 50
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestartButton" type="Button" parent="VBoxContainer"]
+margin_top = 225.0
+margin_right = 1200.0
+margin_bottom = 275.0
+rect_min_size = Vector2( 0, 50 )
+text = "Restart"
+
+[node name="ShopButton" type="Button" parent="VBoxContainer"]
+margin_top = 325.0
+margin_right = 1200.0
+margin_bottom = 375.0
+rect_min_size = Vector2( 0, 50 )
+text = "Shop"
+
+[connection signal="pressed" from="VBoxContainer/RestartButton" to="." method="_on_RestartButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/ShopButton" to="." method="_on_ShopButton_pressed"]
