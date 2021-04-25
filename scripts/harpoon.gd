@@ -6,17 +6,14 @@ export var active := false
 export var base_damage := 50.0
 
 var _velocity := Vector2.ZERO
-var _drag_coefficient := 8.0
+var _drag_coefficient := 5.0
 var _base_acceleration := Vector2(0.0, 100.0)
 var _stuck_in: Node2D = null
 
 onready var _particles := $Particles2D
 
 func _physics_process(delta: float) -> void:
-	if not active:
-		return
-
-	if _stuck_in:
+	if (not active) or _stuck_in:
 		return
 
 	var acceleration := _base_acceleration
