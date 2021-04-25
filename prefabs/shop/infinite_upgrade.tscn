@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scripts/shop/infinite_upgrade.gd" type="Script" id=1]
+[ext_resource path="res://prefabs/shop/money_display.tscn" type="PackedScene" id=2]
 
 [node name="InfiniteUpgrade" type="HBoxContainer"]
 margin_right = 1002.0
@@ -11,39 +12,35 @@ __meta__ = {
 }
 
 [node name="Name" type="Label" parent="."]
-margin_top = 3.0
-margin_right = 57.0
-margin_bottom = 17.0
+margin_top = 4.0
+margin_right = 44.0
+margin_bottom = 16.0
 text = "unknown"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="NextLevel" type="Label" parent="."]
-margin_left = 61.0
-margin_top = 3.0
-margin_right = 79.0
-margin_bottom = 17.0
+margin_left = 48.0
+margin_top = 4.0
+margin_right = 66.0
+margin_bottom = 16.0
 text = "???"
 
 [node name="Control" type="Control" parent="."]
-margin_left = 83.0
-margin_right = 902.0
+margin_left = 70.0
+margin_right = 892.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 
-[node name="Price" type="Label" parent="."]
-margin_left = 906.0
-margin_top = 3.0
-margin_right = 924.0
-margin_bottom = 17.0
-text = "???"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Price" parent="." instance=ExtResource( 2 )]
+margin_left = 896.0
+margin_right = 944.0
+margin_bottom = 20.0
+grow_horizontal = 0
 
 [node name="UpgradeButton" type="Button" parent="."]
-margin_left = 928.0
+margin_left = 948.0
 margin_right = 1002.0
 margin_bottom = 20.0
 text = "UPGRADE"
