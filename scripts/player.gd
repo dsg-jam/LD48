@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export (int) var speed = 200
+export (int) var speed = 15
 export (float) var friction = 0.05
 export (float) var acceleration = 0.02
 export (float) var health = 100.0
@@ -51,7 +51,8 @@ func rotate_player() -> void:
 
 func _physics_process(delta):
 	get_input()
-	velocity = move_and_slide(calculate_velocity())
+	velocity = calculate_velocity()
+	move_and_collide(velocity * speed * delta)
 	rotate_player()
 	if damage_in_progress:
 		return
@@ -64,3 +65,8 @@ func _physics_process(delta):
 
 func _on_DamageTimer_timeout():
 	damage_in_progress = false
+
+
+func _on_CoinDetectionArea_area_entered(area):
+	if area.get_parent().get_node("Coin"):
+		area.get_parent().queue_free()
