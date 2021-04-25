@@ -11,10 +11,12 @@ var _exp_b: float
 
 onready var label_name := $Name
 onready var label_next_level := $NextLevel
-onready var label_price := $Price
+onready var price := $Price
 onready var _player_upgrades := get_node(@"/root/PlayerUpgrades")
 
 func _ready() -> void:
+	assert(price_start and price_end)
+
 	_exp_b = log(float(price_end) / float(price_start)) / log(price_steps - 1)
 	_exp_a = float(price_start) / _exp_b
 
@@ -31,15 +33,14 @@ func _price_for_level(level: int) -> int:
 
 func _update_for_level(level: int) -> void:
 	label_next_level.text = str(level + 1)
-	label_price.text = str(_price_for_level(level + 1))
+	price.money_value = _price_for_level(level + 1)
 
 func _on_UpgradeButton_pressed() -> void:
 	var level := _player_upgrades.levels.get(upgrade_key) as int
 	if level == null:
 		return
 
-	var price := _price_for_level(level + 1)
-	if _player_upgrades.remove_money(price):
+	if _player_upgrades.remove_money(price.money_value):
 		_player_upgrades.levels.increment_by_key(upgrade_key)
 	else:
 		# TODO: use a popup or something to notify the user

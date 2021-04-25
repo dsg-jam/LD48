@@ -37,7 +37,7 @@ const SAVE_FILEPATH := "user://upgrades.json"
 
 var levels := UpgradeLevels.new()
 var parts := Parts.new()
-var money: int = 0
+var money: int = 0 setget _set_money
 
 func _ready() -> void:
 	var err := load_from_file()
@@ -55,8 +55,7 @@ func remove_money(amount: int) -> bool:
 	if money < amount:
 		return false
 
-	money -= amount
-	emit_signal("money_changed")
+	_set_money(money - amount)
 	return true
 
 func save_to_file() -> int:
@@ -104,3 +103,10 @@ static func _update_obj_from_dict(obj: Object, d: Dictionary) -> void:
 		if not prop.usage & PROPERTY_USAGE_SCRIPT_VARIABLE:
 			continue
 		obj.set(prop.name, d.get(prop.name, false))
+
+
+func _set_money(value: int) -> void:
+	assert(value > 0)
+
+	money = value
+	emit_signal("money_changed")
