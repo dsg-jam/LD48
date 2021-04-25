@@ -263,7 +263,7 @@ limit_right = 1408
 limit_smoothed = true
 
 [node name="AnimatedSprite" parent="Player" index="1"]
-frame = 2
+frame = 0
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 7 )

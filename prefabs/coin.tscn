@@ -22,6 +22,7 @@ tracks/0/keys = {
 radius = 72.4431
 
 [node name="CoinNode" type="Node2D" groups=[
+"coin",
 "destroyable",
 ]]
 
