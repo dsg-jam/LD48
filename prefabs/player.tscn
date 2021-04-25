@@ -137,6 +137,14 @@ shape = SubResource( 20 )
 [node name="DamageTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="HarpoonCooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="HarpoonReload" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
 [node name="CoinDetectionArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 8
@@ -168,5 +176,7 @@ __meta__ = {
 one_shot = true
 
 [connection signal="timeout" from="DamageTimer" to="." method="_on_DamageTimer_timeout"]
+[connection signal="timeout" from="HarpoonCooldown" to="." method="_on_HarpoonCooldown_timeout"]
+[connection signal="timeout" from="HarpoonReload" to="." method="_on_HarpoonReload_timeout"]
 [connection signal="area_entered" from="CoinDetectionArea" to="." method="_on_CoinDetectionArea_area_entered"]
 [connection signal="timeout" from="HealthBarTimer" to="." method="_on_HealthBarTimer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/background.png" type="Texture" id=1]
 [ext_resource path="res://prefabs/player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://prefabs/enemies/bully.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/tile_map.gd" type="Script" id=6]
 [ext_resource path="res://scripts/playground_control.gd" type="Script" id=7]
+[ext_resource path="res://prefabs/harpoon.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 80, 64, 0, 64, 0, 0, 80, 0 )
@@ -255,12 +256,16 @@ valign = 1
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 559.408, -100.824 )
+prefab_harpoon = ExtResource( 8 )
 
 [node name="Camera2D" parent="Player" index="0"]
 limit_left = -480
 limit_top = -240
 limit_right = 1408
 limit_smoothed = true
+
+[node name="AnimatedSprite" parent="Player" index="1"]
+frame = 2
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 7 )
