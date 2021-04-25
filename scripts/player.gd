@@ -6,6 +6,7 @@ export (float) var acceleration = 0.02
 export (float) var health = 100.0
 
 onready var sprite := $AnimatedSprite
+onready var _player_upgrades := get_node(@"/root/PlayerUpgrades")
 
 var velocity := Vector2()
 var input_velocity := Vector2()
@@ -75,4 +76,5 @@ func _on_DamageTimer_timeout():
 
 func _on_CoinDetectionArea_area_entered(area):
 	if area.get_parent().is_in_group("coin"):
+		_player_upgrades.money += 1
 		area.get_parent().queue_free()

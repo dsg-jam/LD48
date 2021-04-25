@@ -36,6 +36,7 @@ height = 438.0
 
 [node name="KinematicBody2D" type="KinematicBody2D" groups=[
 "destroyable",
+"enemy",
 ]]
 script = ExtResource( 2 )
 
