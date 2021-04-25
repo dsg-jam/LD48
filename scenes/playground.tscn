@@ -256,12 +256,16 @@ valign = 1
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 559.408, -100.824 )
+prefab_harpoon = ExtResource( 8 )
 
 [node name="Camera2D" parent="Player" index="0"]
 limit_left = -480
 limit_top = -240
 limit_right = 1408
 limit_smoothed = true
+
+[node name="AnimatedSprite" parent="Player" index="1"]
+frame = 4
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 7 )
@@ -273,9 +277,6 @@ script = ExtResource( 6 )
 
 [node name="Bully" parent="." instance=ExtResource( 5 )]
 position = Vector2( 335.149, 359.189 )
-
-[node name="Harpoon" parent="." instance=ExtResource( 8 )]
-position = Vector2( 367.52, 28.2422 )
 
 [node name="DestroyTimer" type="Timer" parent="."]
 wait_time = 2.0
