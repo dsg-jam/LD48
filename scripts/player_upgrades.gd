@@ -3,10 +3,10 @@ extends Node
 class Parts:
 	signal part_changed(key, active)
 
-	var lights: bool
+	var light: bool
 	var harpoon: bool
 	
-	func activate_part_by_key(key: String) -> void:
+	func activate_by_key(key: String) -> void:
 		if self.get(key) == null:
 			push_warning("tried activating non-existant key: %s" % key)
 			return
