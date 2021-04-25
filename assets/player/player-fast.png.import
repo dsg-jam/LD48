@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mine.png-dbc337d583ef28daabee59e987e2f580.stex"
+path="res://.import/player-fast.png-067c1ce0f94a4413e85c7349ee26d0f6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/mine.png"
-dest_files=[ "res://.import/mine.png-dbc337d583ef28daabee59e987e2f580.stex" ]
+source_file="res://assets/player/player-fast.png"
+dest_files=[ "res://.import/player-fast.png-067c1ce0f94a4413e85c7349ee26d0f6.stex" ]
 
 [params]
 

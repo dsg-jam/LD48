@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mine.png-dbc337d583ef28daabee59e987e2f580.stex"
+path="res://.import/player-swiming.png-1ecfbd85223cc68cc1d785d3c4cd5ebf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/mine.png"
-dest_files=[ "res://.import/mine.png-dbc337d583ef28daabee59e987e2f580.stex" ]
+source_file="res://assets/player/player-swiming.png"
+dest_files=[ "res://.import/player-swiming.png-1ecfbd85223cc68cc1d785d3c4cd5ebf.stex" ]
 
 [params]
 
