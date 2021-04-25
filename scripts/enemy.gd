@@ -77,6 +77,12 @@ func _physics_process(delta):
 	collision_control(collision)
 
 
+func reduce_health(amount: float) -> void:
+	health -= amount
+	# TODO hit and death animation
+	if health <= 0:
+		queue_free()
+
 # Signals handler
 
 func _on_Timer_timeout():

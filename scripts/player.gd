@@ -69,15 +69,16 @@ func reduce_health(amount) -> void:
 
 
 func rotate_player() -> void:
-	if velocity.x < 0:
+	if velocity.x < 0.0:
 		sprite.set_flip_h(true)
 		self.rotation = velocity.angle() + PI
 	else:
-		sprite.set_flip_h(false)
+		if velocity.length_squared() > 0.0:
+			sprite.set_flip_h(false)
 		self.rotation = velocity.angle()
 
 func _process(_delta: float) -> void:
-	if Input.is_action_pressed("aim"):
+	if _player_upgrades.parts.harpoon and Input.is_action_pressed("aim"):
 		_aiming = true
 		_process_aiming()
 	elif _aiming:
@@ -91,7 +92,7 @@ func _physics_process(delta):
 	rotate_player()
 	if damage_in_progress:
 		return
-	if input_velocity == Vector2.ZERO and velocity.length() < 10:
+	if (_aiming or input_velocity == Vector2.ZERO) and velocity.length() < 10:
 			velocity = Vector2()
 			$AnimatedSprite.animation = "idle"
 	else:

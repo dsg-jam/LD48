@@ -27,8 +27,9 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 21, 28 )
+[sub_resource type="CapsuleShape2D" id=8]
+radius = 20.6965
+height = 7.48994
 
 [sub_resource type="CapsuleShape2D" id=7]
 radius = 173.0
@@ -67,7 +68,7 @@ offset = Vector2( -3.01176, -0.752941 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -7, 5 )
 rotation = 1.5708
-shape = SubResource( 6 )
+shape = SubResource( 8 )
 
 [node name="VerticalTimer" type="Timer" parent="."]
 process_mode = 0
