@@ -31,13 +31,17 @@ func calculate_velocity() -> Vector2:
 	return velocity.linear_interpolate(Vector2(), friction)
 
 
+func game_over():
+	get_tree().change_scene("res://scenes/game_over_menu.tscn")
+
+
 func reduce_health(amount) -> void:
 	$AnimatedSprite.animation = "damage"
 	damage_in_progress = true
 	$DamageTimer.start()
 	health -= amount
-	print(health)
-
+	if health <= 0:
+		game_over()
 
 func rotate_player() -> void:
 	if velocity.x < 0:
