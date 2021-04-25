@@ -72,5 +72,5 @@ func _on_DamageTimer_timeout():
 
 
 func _on_CoinDetectionArea_area_entered(area):
-	if area.get_parent().get_node("Coin"):
+	if area.get_parent().name == "CoinNode":
 		area.get_parent().queue_free()
