@@ -80,8 +80,12 @@ func _physics_process(delta):
 func reduce_health(amount: float) -> void:
 	health -= amount
 	# TODO hit and death animation
+	health_bar.value = range_lerp(health, 0, max_health, 0, 100)
+	health_bar.visible = true
 	if health <= 0:
 		queue_free()
+	if health/max_health > 0.3:
+		$HealthBarTimer.start()
 
 # Signals handler
 
