@@ -3,20 +3,22 @@ extends KinematicBody2D
 # Enemy controller
 
 export (int) var idle_speed := 10
-export (int) var hunting_speed := 20
+export (int) var hunting_speed := 15
 
 export (float) var idle_acceleration := 0.01
 export (float) var hunting_acceleration := 0.04
 
 export (float) var friction = 0.01
 
-export (float) var health = 100.0
+export (float) var max_health = 100.0
 export (float) var damage = 25.0
 
 export (float) var bounce_rate = 50.0
 
 onready var sprite := $AnimatedSprite
+onready var health_bar := $Control/HealthBar
 
+var health : float = max_health
 var speed := idle_speed
 var acceleration := idle_acceleration
 
@@ -27,6 +29,10 @@ var player : KinematicBody2D
 var is_hunting := false
 
 var rng = RandomNumberGenerator.new()
+
+
+func _ready():
+	health_bar.visible = false
 
 
 func hunting_velocity() -> Vector2:
@@ -66,6 +72,7 @@ func _physics_process(delta):
 		direction = hunting_velocity()
 	velocity = calculate_velocity()
 	rotate_enemy()
+	health_bar.value = range_lerp(health, 0, max_health, 0, 100)
 	var collision = move_and_collide(velocity * speed * delta)
 	collision_control(collision)
 
@@ -90,3 +97,7 @@ func _on_PlayerDetectionArea_body_exited(body):
 		is_hunting = false
 		speed = idle_speed
 		acceleration = idle_acceleration
+
+
+func _on_HealthBarTimer_timeout():
+	health_bar.visible = false

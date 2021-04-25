@@ -3,15 +3,28 @@ extends KinematicBody2D
 export (int) var speed = 15
 export (float) var friction = 0.05
 export (float) var acceleration = 0.02
-export (float) var health = 100.0
+export (float) var max_health = 100.0
+
+
+export (float) var speed_rate := 1.0
+export (float) var damage_reduction_rate := 1.0
+
 
 onready var sprite := $AnimatedSprite
+onready var health_bar := $Control/HealthBar
 onready var _player_upgrades := get_node(@"/root/PlayerUpgrades")
 
+var health : float = max_health
 var velocity := Vector2()
 var input_velocity := Vector2()
 
 var damage_in_progress = false
+
+func _ready():
+	health_bar.visible = false
+	speed += 2 * _player_upgrades.levels.speed
+	damage_reduction_rate = _player_upgrades.levels.hull_strength
+	
 
 func get_input() -> void:
 	input_velocity = Vector2()
@@ -40,11 +53,16 @@ func reduce_health(amount) -> void:
 	if damage_in_progress:
 		return
 	$AnimatedSprite.animation = "damage"
-	damage_in_progress = true
-	$DamageTimer.start()
-	health -= amount
+	health -= amount / damage_reduction_rate
+	health_bar.value = range_lerp(health, 0, max_health, 0, 100)
 	if health <= 0:
 		game_over()
+	damage_in_progress = true
+	health_bar.visible = true
+	$DamageTimer.start()
+	if health/max_health > 0.3:
+		$HealthBarTimer.start()
+
 
 func rotate_player() -> void:
 	if velocity.x < 0:
@@ -53,7 +71,6 @@ func rotate_player() -> void:
 	else:
 		sprite.set_flip_h(false)
 		self.rotation = velocity.angle()
-
 
 
 func _physics_process(delta):
@@ -78,3 +95,7 @@ func _on_CoinDetectionArea_area_entered(area):
 	if area.get_parent().is_in_group("coin"):
 		_player_upgrades.money += 1
 		area.get_parent().queue_free()
+
+
+func _on_HealthBarTimer_timeout():
+	health_bar.visible = false

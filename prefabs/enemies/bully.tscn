@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/enemies/fish.png" type="Texture" id=1]
 [ext_resource path="res://scripts/enemy.gd" type="Script" id=2]
@@ -34,6 +34,20 @@ extents = Vector2( 21, 28 )
 radius = 173.0
 height = 438.0
 
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.0352941, 0.576471, 0.196078, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.145098, 0.266667, 0.372549, 0.588235 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [node name="Bully" type="KinematicBody2D" groups=[
 "destroyable",
 "enemy",
@@ -46,7 +60,7 @@ script = ExtResource( 2 )
 position = Vector2( 8, 2 )
 scale = Vector2( 2.65625, 2.65625 )
 frames = SubResource( 5 )
-frame = 1
+frame = 3
 playing = true
 offset = Vector2( -3.01176, -0.752941 )
 
@@ -67,6 +81,30 @@ collision_mask = 2
 rotation = 1.5708
 shape = SubResource( 7 )
 
+[node name="Control" type="Control" parent="."]
+margin_left = -32.0
+margin_top = -40.0
+margin_right = 32.0
+margin_bottom = -32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" type="ProgressBar" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/fg = SubResource( 8 )
+custom_styles/bg = SubResource( 9 )
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBarTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="VerticalTimer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="PlayerDetectionArea" to="." method="_on_PlayerDetectionArea_body_entered"]
 [connection signal="body_exited" from="PlayerDetectionArea" to="." method="_on_PlayerDetectionArea_body_exited"]
+[connection signal="timeout" from="HealthBarTimer" to="." method="_on_HealthBarTimer_timeout"]
