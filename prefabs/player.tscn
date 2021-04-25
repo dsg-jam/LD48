@@ -6,93 +6,93 @@
 [ext_resource path="res://assets/player/player-swiming.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 80, 80 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 2 )
 region = Rect2( 80, 0, 80, 80 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 2 )
 region = Rect2( 160, 0, 80, 80 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 2 )
 region = Rect2( 240, 0, 80, 80 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 2 )
 region = Rect2( 320, 0, 80, 80 )
 
 [sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 80, 80 )
+atlas = ExtResource( 2 )
+region = Rect2( 400, 0, 80, 80 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 4 )
-region = Rect2( 80, 0, 80, 80 )
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 80, 80 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 4 )
-region = Rect2( 160, 0, 80, 80 )
+atlas = ExtResource( 3 )
+region = Rect2( 80, 0, 80, 80 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 4 )
-region = Rect2( 240, 0, 80, 80 )
+atlas = ExtResource( 3 )
+region = Rect2( 160, 0, 80, 80 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 4 )
-region = Rect2( 320, 0, 80, 80 )
+atlas = ExtResource( 3 )
+region = Rect2( 240, 0, 80, 80 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 4 )
-region = Rect2( 400, 0, 80, 80 )
+atlas = ExtResource( 3 )
+region = Rect2( 320, 0, 80, 80 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 4 )
-region = Rect2( 480, 0, 80, 80 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 80, 80 )
 
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 2 )
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 4 )
 region = Rect2( 80, 0, 80, 80 )
 
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 2 )
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
 region = Rect2( 160, 0, 80, 80 )
 
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 2 )
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 4 )
 region = Rect2( 240, 0, 80, 80 )
 
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 2 )
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 4 )
 region = Rect2( 320, 0, 80, 80 )
 
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 2 )
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 4 )
 region = Rect2( 400, 0, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 4 )
+region = Rect2( 480, 0, 80, 80 )
 
 [sub_resource type="SpriteFrames" id=19]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "idle",
+"speed": 6.0
+}, {
+"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
 "name": "damage",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
 "loop": true,
 "name": "swimming",
 "speed": 5.0
-}, {
-"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
-"loop": true,
-"name": "idle",
-"speed": 6.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=20]
@@ -102,14 +102,14 @@ height = 23.2998
 [sub_resource type="CircleShape2D" id=21]
 radius = 64.315
 
-[sub_resource type="StyleBoxFlat" id=23]
+[sub_resource type="StyleBoxFlat" id=24]
 bg_color = Color( 0.0352941, 0.576471, 0.196078, 1 )
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id=22]
+[sub_resource type="StyleBoxFlat" id=23]
 bg_color = Color( 0.145098, 0.266667, 0.372549, 0.588235 )
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -128,6 +128,7 @@ smoothing_enabled = true
 scale = Vector2( 2, 2 )
 frames = SubResource( 19 )
 animation = "idle"
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -164,8 +165,8 @@ __meta__ = {
 [node name="HealthBar" type="ProgressBar" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/fg = SubResource( 23 )
-custom_styles/bg = SubResource( 22 )
+custom_styles/fg = SubResource( 24 )
+custom_styles/bg = SubResource( 23 )
 value = 50.0
 percent_visible = false
 __meta__ = {

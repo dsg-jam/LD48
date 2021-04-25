@@ -81,8 +81,10 @@ func load_from_file() -> int:
 	var raw_content := file.get_as_text()
 	file.close()
 	
-	var content := parse_json(raw_content) as Dictionary
-	
+	var content = parse_json(raw_content)
+	if not content is Dictionary:
+		return ERR_PARSE_ERROR
+
 	_update_obj_from_dict(levels, content.get("levels", {}))
 	_update_obj_from_dict(parts, content.get("parts", {}))
 	money = content.get("money", 0)

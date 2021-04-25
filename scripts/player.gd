@@ -64,7 +64,7 @@ func reduce_health(amount) -> void:
 	if damage_in_progress:
 		return
 	$AnimatedSprite.animation = "damage"
-	health -= amount / damage_reduction_rate
+	health -= amount / (damage_reduction_rate + 1)
 	health_bar.value = range_lerp(health, 0, max_health, 0, 100)
 	if health <= 0:
 		game_over()
