@@ -36,6 +36,8 @@ func game_over():
 
 
 func reduce_health(amount) -> void:
+	if damage_in_progress:
+		return
 	$AnimatedSprite.animation = "damage"
 	damage_in_progress = true
 	$DamageTimer.start()
@@ -72,5 +74,5 @@ func _on_DamageTimer_timeout():
 
 
 func _on_CoinDetectionArea_area_entered(area):
-	if area.get_parent().name == "CoinNode":
+	if area.get_parent().is_in_group("coin"):
 		area.get_parent().queue_free()
