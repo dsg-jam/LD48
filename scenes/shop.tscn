@@ -1,15 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://prefabs/shop/infinite_upgrade.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefabs/shop/part.tscn" type="PackedScene" id=2]
 [ext_resource path="res://prefabs/shop/money_display.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/shop/shop.gd" type="Script" id=4]
+[ext_resource path="res://scenes/playground.tscn" type="PackedScene" id=5]
 
 [node name="Shop" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+scene_playground = ExtResource( 5 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 7.0
@@ -33,7 +37,7 @@ show_player_money = true
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
 margin_top = 36.0
 margin_right = 1186.0
-margin_bottom = 586.0
+margin_bottom = 489.0
 size_flags_vertical = 3
 tab_align = 0
 
@@ -113,3 +117,21 @@ rect_pivot_offset = Vector2( -313.536, 170.173 )
 part_name = "Light"
 part_key = "light"
 part_price = 50
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 493.0
+margin_right = 1186.0
+margin_bottom = 586.0
+custom_constants/margin_right = 300
+custom_constants/margin_top = 25
+custom_constants/margin_left = 300
+custom_constants/margin_bottom = 50
+
+[node name="Button" type="Button" parent="VBoxContainer/MarginContainer"]
+margin_left = 300.0
+margin_top = 25.0
+margin_right = 886.0
+margin_bottom = 43.0
+text = "Back"
+
+[connection signal="pressed" from="VBoxContainer/MarginContainer/Button" to="." method="_on_back_pressed"]
