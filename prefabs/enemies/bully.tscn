@@ -34,16 +34,19 @@ extents = Vector2( 21, 28 )
 radius = 173.0
 height = 438.0
 
-[node name="KinematicBody2D" type="KinematicBody2D" groups=[
+[node name="Bully" type="KinematicBody2D" groups=[
 "destroyable",
 "enemy",
 ]]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 8, 2 )
 scale = Vector2( 2.65625, 2.65625 )
 frames = SubResource( 5 )
+frame = 1
 playing = true
 offset = Vector2( -3.01176, -0.752941 )
 
@@ -57,6 +60,8 @@ process_mode = 0
 autostart = true
 
 [node name="PlayerDetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea"]
 rotation = 1.5708
