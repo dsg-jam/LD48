@@ -13,11 +13,11 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 1017.0
+margin_right = 1193.0
 margin_bottom = 593.0
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_right = 1010.0
+margin_right = 1186.0
 margin_bottom = 12.0
 text = "SUBBY"
 align = 1
@@ -25,13 +25,13 @@ valign = 1
 
 [node name="MoneyDisplay" parent="VBoxContainer" instance=ExtResource( 3 )]
 margin_top = 16.0
-margin_right = 1010.0
-margin_bottom = 28.0
+margin_right = 1186.0
+margin_bottom = 32.0
 show_player_money = true
 
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
-margin_top = 32.0
-margin_right = 1010.0
+margin_top = 36.0
+margin_right = 1186.0
 margin_bottom = 586.0
 size_flags_vertical = 3
 tab_align = 0
@@ -52,6 +52,7 @@ __meta__ = {
 }
 
 [node name="Speed" parent="VBoxContainer/TabContainer/Upgrades/VBoxContainer" instance=ExtResource( 1 )]
+margin_right = 1178.0
 margin_bottom = 18.0
 upgrade_key = "speed"
 upgrade_name = "Speed"
@@ -60,6 +61,7 @@ price_end = 1000
 
 [node name="HullStrength" parent="VBoxContainer/TabContainer/Upgrades/VBoxContainer" instance=ExtResource( 1 )]
 margin_top = 22.0
+margin_right = 1178.0
 margin_bottom = 40.0
 upgrade_key = "hull_strength"
 upgrade_name = "Hull strength"
@@ -69,6 +71,7 @@ price_steps = 10
 
 [node name="FuelTankSize" parent="VBoxContainer/TabContainer/Upgrades/VBoxContainer" instance=ExtResource( 1 )]
 margin_top = 44.0
+margin_right = 1178.0
 margin_bottom = 62.0
 upgrade_key = "fuel_tank_size"
 upgrade_name = "Fuel tank size"

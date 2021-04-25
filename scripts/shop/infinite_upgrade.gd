@@ -23,7 +23,7 @@ func _ready() -> void:
 	var level := _player_upgrades.levels.get(upgrade_key) as int
 
 	label_name.text = upgrade_name
-	_update_for_level(level)
+	_update_for_level(level, false)
 
 	var err = _player_upgrades.levels.connect("level_changed", self, "_on_upgrade_level_changed")
 	assert(!err)
@@ -31,9 +31,9 @@ func _ready() -> void:
 func _price_for_level(level: int) -> int:
 	return int(floor(_exp_a * pow(_exp_b, level)))
 
-func _update_for_level(level: int) -> void:
+func _update_for_level(level: int, animate: bool) -> void:
 	label_next_level.text = str(level + 1)
-	price.money_value = _price_for_level(level + 1)
+	price.set_money_value(_price_for_level(level + 1), animate)
 
 func _on_UpgradeButton_pressed() -> void:
 	var level := _player_upgrades.levels.get(upgrade_key) as int
@@ -48,4 +48,4 @@ func _on_UpgradeButton_pressed() -> void:
 
 func _on_upgrade_level_changed(key: String, level: int) -> void:
 	if key == upgrade_key:
-		_update_for_level(level)
+		_update_for_level(level, true)
