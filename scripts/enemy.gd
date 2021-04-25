@@ -20,7 +20,7 @@ onready var sprite := $AnimatedSprite
 var speed := idle_speed
 var acceleration := idle_acceleration
 
-var direction := Vector2(1, 0)
+var direction := Vector2(speed, 0)
 var velocity := Vector2()
 
 var player : KinematicBody2D

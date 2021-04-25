@@ -11,7 +11,7 @@ var rng = RandomNumberGenerator.new()
 # Load prefabs
 var coin_prefab := preload("res://prefabs/coin.tscn")
 
-var height := 0
+var height := 0.0
 
 
 func _ready():
@@ -31,9 +31,9 @@ func generate_coin(coin_pos : Vector2):
 	get_tree().current_scene.add_child(new_coin)
 
 
-func _process(delta):
-	height = max(0, floor(player.global_position.y / 100))
-	get_node("CanvasLayer/VBoxContainer/HeightLabel").text = str(height) + " m"
+func _process(_delta):
+	height = max(0, player.global_position.y / 100.0)
+	get_node("CanvasLayer/VBoxContainer/HeightLabel").text = "%.1fm" % height
 	
 #	if height % 15 == 0:
 #		rng.randomize()

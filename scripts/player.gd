@@ -32,7 +32,7 @@ func calculate_velocity() -> Vector2:
 
 
 func game_over():
-	get_tree().change_scene("res://scenes/game_over_menu.tscn")
+	var _err := get_tree().change_scene("res://scenes/game_over_menu.tscn")
 
 
 func reduce_health(amount) -> void:
@@ -56,7 +56,7 @@ func rotate_player() -> void:
 func _physics_process(delta):
 	get_input()
 	velocity = calculate_velocity()
-	move_and_collide(velocity * speed * delta)
+	var _collision := move_and_collide(velocity * speed * delta)
 	rotate_player()
 	if damage_in_progress:
 		return
