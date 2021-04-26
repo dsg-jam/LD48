@@ -36,6 +36,7 @@ func _process(_delta) -> void:
 	
 	coin_spawn_manager(_player_depth)
 	enemy_spawn_manager(_player_depth)
+	barrier_spawn_manager()
 
 func enemy_hunting_speed(depth : float) -> float:
 	return exp(0.025 * (depth)) + 15
@@ -106,3 +107,6 @@ func _on_player_money_changed() -> void:
 
 func _on_DestroyTimer_timeout() -> void:
 	destroy_nodes()
+
+func barrier_spawn_manager() -> void:
+	$TileMap.update_barriers(player.global_position.y)
