@@ -1,16 +1,17 @@
 extends Node2D
 
-onready var player := $Player
-
 const LEFT_BARRIER = -400
 const RIGHT_BARRIER = 1300
 
 var rng = RandomNumberGenerator.new()
+var _player_depth: float = 0.0
 
 # Load prefabs
 var coin_prefab := preload("res://prefabs/coin.tscn")
 var enemy_prefab := preload("res://prefabs/enemies/bully.tscn")
 
+onready var player := $Player
+onready var _player_upgrades := get_node(@"/root/PlayerUpgrades")
 
 func enemy_hunting_speed(depth : float) -> float:
 	return exp(0.025 * (depth)) + 15
@@ -39,7 +40,7 @@ func enemy_spawn(depth : float, spawn_pos : Vector2) -> void:
 	get_tree().current_scene.add_child(new_node)
 
 
-func coin_spawn(depth : float, spawn_pos : Vector2) -> void:
+func coin_spawn(_depth : float, spawn_pos : Vector2) -> void:
 	var new_node = coin_prefab.instance()
 	new_node.position = spawn_pos
 	get_tree().current_scene.add_child(new_node)
@@ -76,14 +77,18 @@ func coin_spawn_manager(depth : float) -> void:
 		rng.randomize()
 		coin_spawn(depth, Vector2(rng.randf_range(LEFT_BARRIER, RIGHT_BARRIER), rng.randf_range(player_depth + 500, player_depth + 2500)))
 
+func _exit_tree() -> void:
+	var score = Score.new()
+	score.depth = _player_depth
+	score.money = 0
+	_player_upgrades.current_score = score
 
 func _process(_delta) -> void:
-	var depth := max(0, player.global_position.y / 100.0)
-	get_node("CanvasLayer/VBoxContainer/HeightLabel").text = "%.1fm" % depth
+	_player_depth = max(0, player.global_position.y / 100.0)
+	get_node("CanvasLayer/VBoxContainer/HeightLabel").text = "%.1fm" % _player_depth
 	
-	coin_spawn_manager(depth)
-	enemy_spawn_manager(depth)
-
+	coin_spawn_manager(_player_depth)
+	enemy_spawn_manager(_player_depth)
 
 func _on_DestroyTimer_timeout() -> void:
 	destroy_nodes()
