@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Reference",
+"class": "Score",
+"language": "GDScript",
+"path": "res://scripts/classes/score.gd"
+} ]
+_global_script_class_icons={
+"Score": ""
+}
+
 [application]
 
 config/name="LD48"
