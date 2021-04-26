@@ -40,11 +40,11 @@ func _process(_delta) -> void:
 	barrier_spawn_manager()
 
 func enemy_hunting_speed(depth : float) -> float:
-	return exp(0.025 * (depth)) + 15
+	return log(depth + 1) + 15
 
 
 func amount_of_enemies(depth : float) -> int:
-	return int(floor(exp(0.015 * depth)))
+	return int(floor(0.7 * log(depth + 1)))
 
 
 func amount_of_coins(depth : float) -> int:
