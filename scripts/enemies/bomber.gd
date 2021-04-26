@@ -121,6 +121,7 @@ func reduce_health(amount: float) -> void:
 		_player_upgrades.money += 5
 		health_bar.visible = false
 		sprite.animation = "death"
+		$CollisionShape2D.disabled = true
 		$DeathTimer.start()
 	if health/max_health > 0.3:
 		$HealthBarTimer.start()
