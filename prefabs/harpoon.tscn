@@ -36,6 +36,7 @@ texture = ExtResource( 1 )
 position = Vector2( -6.5, 0 )
 rotation = 1.5708
 shape = SubResource( 1 )
+disabled = true
 
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( -39, 0 )

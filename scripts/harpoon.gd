@@ -11,6 +11,7 @@ var _base_acceleration := Vector2(0.0, 100.0)
 var _stuck_in: Node2D = null
 
 onready var _particles := $Particles2D
+onready var _collision_shape := $CollisionShape2D
 
 func _physics_process(delta: float) -> void:
 	if (not active) or _stuck_in:
@@ -29,6 +30,7 @@ func _physics_process(delta: float) -> void:
 
 func launch(strength: float) -> void:
 	active = true
+	_collision_shape.disabled = false
 	_velocity = Vector2.RIGHT.rotated(self.rotation) * strength
 
 func boost(velocity: Vector2) -> void:
