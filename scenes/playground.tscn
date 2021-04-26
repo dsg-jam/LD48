@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/background.png" type="Texture" id=1]
 [ext_resource path="res://prefabs/player.tscn" type="PackedScene" id=2]
@@ -16,18 +16,24 @@ points = PoolVector2Array( 80, 64, 0, 64, 0, 0, 80, 0 )
 points = PoolVector2Array( 80, 64, 0.519402, 63.9005, 0.0520782, 0.158188, 80, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 48, 80, 0, 80, 0, 0, 48, 0 )
+points = PoolVector2Array( 107, 119, 0, 65.3333, 0, 0, 107, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
-points = PoolVector2Array( 48, 80, 0, 80, 0, 0, 48, 0 )
+points = PoolVector2Array( 116, 69.5, 0, 121, 0, 0, 116, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
-points = PoolVector2Array( 0, 0, 64, 0, 64, 80, 0, 80 )
+points = PoolVector2Array( 48, 80, 0, 80, 0, 0, 48, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=6]
+points = PoolVector2Array( 48, 80, 0, 80, 0, 0, 48, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+points = PoolVector2Array( 0, 0, 64, 0, 64, 80, 0, 80 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
 points = PoolVector2Array( 64, 80, 0, 80, 0, 0, 64, 0 )
 
-[sub_resource type="TileSet" id=7]
+[sub_resource type="TileSet" id=9]
 0/name = "tiles.png 0"
 0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
@@ -80,14 +86,14 @@ points = PoolVector2Array( 64, 80, 0, 80, 0, 0, 64, 0 )
 2/navigation_offset = Vector2( 0, 0 )
 2/shape_offset = Vector2( 0, 0 )
 2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-2/shape = SubResource( 3 )
+2/shape = SubResource( 5 )
 2/shape_one_way = false
 2/shape_one_way_margin = 1.0
 2/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 3 ),
+"shape": SubResource( 5 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 2/z_index = 0
@@ -101,14 +107,14 @@ points = PoolVector2Array( 64, 80, 0, 80, 0, 0, 64, 0 )
 3/navigation_offset = Vector2( 0, 0 )
 3/shape_offset = Vector2( 0, 0 )
 3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-3/shape = SubResource( 4 )
+3/shape = SubResource( 6 )
 3/shape_one_way = false
 3/shape_one_way_margin = 1.0
 3/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 4 ),
+"shape": SubResource( 6 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 3/z_index = 0
@@ -122,14 +128,14 @@ points = PoolVector2Array( 64, 80, 0, 80, 0, 0, 64, 0 )
 4/navigation_offset = Vector2( 0, 0 )
 4/shape_offset = Vector2( 0, 0 )
 4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-4/shape = SubResource( 5 )
+4/shape = SubResource( 7 )
 4/shape_one_way = false
 4/shape_one_way_margin = 1.0
 4/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 5 ),
+"shape": SubResource( 7 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 4/z_index = 0
@@ -143,14 +149,14 @@ points = PoolVector2Array( 64, 80, 0, 80, 0, 0, 64, 0 )
 5/navigation_offset = Vector2( 0, 0 )
 5/shape_offset = Vector2( 0, 0 )
 5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-5/shape = SubResource( 6 )
+5/shape = SubResource( 8 )
 5/shape_one_way = false
 5/shape_one_way_margin = 1.0
 5/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 6 ),
+"shape": SubResource( 8 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 5/z_index = 0
@@ -210,9 +216,55 @@ points = PoolVector2Array( 64, 80, 0, 80, 0, 0, 64, 0 )
 9/shape_one_way_margin = 0.0
 9/shapes = [  ]
 9/z_index = 0
+10/name = "tiles.png 10"
+10/texture = ExtResource( 3 )
+10/tex_offset = Vector2( 0, 0 )
+10/modulate = Color( 1, 1, 1, 1 )
+10/region = Rect2( 20, 319, 107, 119 )
+10/tile_mode = 0
+10/occluder_offset = Vector2( 0, 0 )
+10/navigation_offset = Vector2( 0, 0 )
+10/shape_offset = Vector2( 0, 0 )
+10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+10/shape = SubResource( 3 )
+10/shape_one_way = false
+10/shape_one_way_margin = 1.0
+10/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 3 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+10/z_index = 0
+11/name = "tiles.png 11"
+11/texture = ExtResource( 3 )
+11/tex_offset = Vector2( 0, 0 )
+11/modulate = Color( 1, 1, 1, 1 )
+11/region = Rect2( 140, 319, 116, 121 )
+11/tile_mode = 0
+11/occluder_offset = Vector2( 0, 0 )
+11/navigation_offset = Vector2( 0, 0 )
+11/shape_offset = Vector2( 0, 0 )
+11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+11/shape = SubResource( 4 )
+11/shape_one_way = false
+11/shape_one_way_margin = 1.0
+11/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 4 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+11/z_index = 0
 
 [node name="Playground" type="Node2D"]
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_horizontal_guides_": [ -224.222 ],
+"_edit_vertical_guides_": [ 1388.37 ]
+}
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -259,20 +311,20 @@ position = Vector2( 559.408, -100.824 )
 prefab_harpoon = ExtResource( 8 )
 
 [node name="Camera2D" parent="Player" index="0"]
-limit_left = -480
-limit_top = -240
-limit_right = 1408
+limit_left = -470
+limit_top = -220
+limit_right = 1388
 limit_smoothed = true
 
 [node name="AnimatedSprite" parent="Player" index="1"]
-frame = 4
+frame = 5
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource( 7 )
+tile_set = SubResource( 9 )
 cell_size = Vector2( 80, 78 )
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( -131078, 3, 0, -196591, 2, 0, -65542, 3, 0, -131055, 2, 0, -6, 3, 0, -65519, 2, 0, 65530, 3, 0, 0, 9, 0, 3, 9, 0, 11, 9, 0, 14, 9, 0, 17, 2, 0, 131066, 3, 0, 65553, 2, 0, 196602, 3, 0, 131089, 2, 0, 262138, 3, 0, 196625, 2, 0, 327674, 3, 0, 262161, 2, 0, 393210, 3, 0, 327697, 2, 0, 458746, 3, 0, 393233, 2, 0, 524282, 3, 0, 458769, 2, 0, 589818, 3, 0, 524305, 2, 0, 589841, 2, 0, 655377, 2, 0, 720913, 2, 0, 786449, 2, 0, 851985, 2, 0, 917521, 2, 0 )
+tile_data = PoolIntArray( -131078, 11, 0, -131077, 0, 0, -131076, 0, 0, -131075, 0, 0, -131074, 0, 0, -131073, 0, 0, -196608, 0, 0, -196607, 0, 0, -196606, 0, 0, -196605, 0, 0, -196604, 0, 0, -196603, 0, 0, -196602, 0, 0, -196601, 0, 0, -196600, 0, 0, -196599, 0, 0, -196598, 0, 0, -196597, 0, 0, -196596, 0, 0, -196595, 0, 0, -196594, 0, 0, -196593, 0, 0, -196592, 10, 0, -65542, 3, 0, -131055, 2, 0, -6, 3, 0, -65519, 2, 0, 65530, 3, 0, 0, 9, 0, 3, 9, 0, 11, 9, 0, 14, 9, 0, 17, 2, 0, 131066, 3, 0, 65553, 2, 0, 196602, 3, 0, 131089, 2, 0, 262138, 3, 0, 196625, 2, 0, 327674, 3, 0, 262161, 2, 0, 393210, 3, 0, 327697, 2, 0, 458746, 3, 0, 393233, 2, 0, 524282, 3, 0, 458769, 2, 0, 589818, 3, 0, 524305, 2, 0, 589841, 2, 0, 655377, 2, 0, 720913, 2, 0, 786449, 2, 0, 851985, 2, 0, 917521, 2, 0 )
 script = ExtResource( 6 )
 
 [node name="Bully" parent="." instance=ExtResource( 5 )]
