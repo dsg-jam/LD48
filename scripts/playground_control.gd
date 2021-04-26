@@ -11,7 +11,8 @@ var _player_depth: float = 0.0
 
 # Load prefabs
 var coin_prefab := preload("res://prefabs/coin.tscn")
-var enemy_prefab := preload("res://prefabs/enemies/bully.tscn")
+var bully_prefab := preload("res://prefabs/enemies/bully.tscn")
+var bomber_prefab := preload("res://prefabs/enemies/bomber.tscn")
 
 onready var player := $Player
 onready var _label_height := get_node(_label_height_path)
@@ -59,7 +60,13 @@ func destroy_nodes() -> void:
 
 
 func enemy_spawn(depth : float, spawn_pos : Vector2) -> void:
-	var new_node = enemy_prefab.instance()
+	rng.randomize()
+	var prefab_number = rng.randf_range(0, 1)
+	var new_node
+	if prefab_number < 0.75:
+		new_node = bully_prefab.instance()
+	else:
+		new_node = bomber_prefab.instance()
 	new_node.position = spawn_pos
 	new_node.hunting_speed = enemy_hunting_speed(depth)
 	get_tree().current_scene.add_child(new_node)

@@ -31,7 +31,6 @@ var velocity := Vector2()
 var player : KinematicBody2D
 var is_hunting := false
 var player_detected := false
-var is_in_range := false
 var can_shoot := true
 
 var rng = RandomNumberGenerator.new()
@@ -50,7 +49,6 @@ func hunting_velocity() -> Vector2:
 	
 	if (lower_radius < direction.length() and direction.length() < upper_radius):
 		direction = Vector2.ZERO
-		is_in_range = true
 	elif direction.length() < lower_radius:
 		direction *= -1
 	
@@ -104,10 +102,10 @@ func _physics_process(delta):
 		else:
 			self.rotation = (player.global_position - self.global_position).angle()
 			sprite.set_flip_h(false)
+		if can_shoot:
+			shoot(player.global_position - self.global_position)
 	else:
 		rotate_enemy()
-	if can_shoot and is_in_range:
-		shoot(player.global_position - self.global_position)
 	health_bar.value = range_lerp(health, 0, max_health, 0, 100)
 	var collision = move_and_collide(velocity * speed * delta)
 	collision_control(collision)
