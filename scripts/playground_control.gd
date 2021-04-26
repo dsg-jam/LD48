@@ -11,27 +11,17 @@ var rng = RandomNumberGenerator.new()
 var coin_prefab := preload("res://prefabs/coin.tscn")
 var enemy_prefab := preload("res://prefabs/enemies/bully.tscn")
 
-var height := 0.0
+
+func enemy_hunting_speed(depth : float) -> float:
+	return exp(0.025 * (depth)) + 15
 
 
-func enemy_hunting_speed():
-	return exp(0.01 * (height / 100)) + 15
+func amount_of_enemies(depth : float) -> int:
+	return int(floor(exp(0.015 * depth)))
 
 
-func get_enemy_spacing():
-	return exp(-0.25 * (height / 100)) * 1000
-
-
-func get_coin_spacing():
-	return exp(-0.1 * (height / 100)) * 1500
-
-
-func amount_of_enemies():
-	return int(floor(exp(0.002 * (height / 10))))
-
-
-func amount_of_coins():
-	return int(floor(exp(0.0001 * (height / 10))))
+func amount_of_coins(depth : float) -> int:
+	return int(floor(exp(0.01 * depth)))
 
 
 func destroy_nodes() -> void:
@@ -42,56 +32,58 @@ func destroy_nodes() -> void:
 			destroyable.queue_free()
 
 
-func enemy_spawn(spawn_pos : Vector2) -> void:
+func enemy_spawn(depth : float, spawn_pos : Vector2) -> void:
 	var new_node = enemy_prefab.instance()
 	new_node.position = spawn_pos
-	new_node.hunting_speed = enemy_hunting_speed()
+	new_node.hunting_speed = enemy_hunting_speed(depth)
 	get_tree().current_scene.add_child(new_node)
 
 
-func coin_spawn(spawn_pos : Vector2) -> void:
+func coin_spawn(depth : float, spawn_pos : Vector2) -> void:
 	var new_node = coin_prefab.instance()
 	new_node.position = spawn_pos
 	get_tree().current_scene.add_child(new_node)
 
 
-func enemy_spawn_manager() -> void:
-	var nodes = get_tree().get_nodes_in_group("enemy")
-	if len(nodes) != 0:
-		var nearest_node = nodes[0]
-		for node in nodes:
-			if node.is_hunting:
-				continue
-			if node.global_position.distance_to(player.global_position) < nearest_node.global_position.distance_to(player.global_position):
-				nearest_node = node
-		if nearest_node.global_position.distance_to(player.global_position) < get_coin_spacing():
-			return
-	for _i in range(amount_of_enemies()):
+func enemy_spawn_manager(depth : float) -> void:
+	var enemies = get_tree().get_nodes_in_group("enemy")
+	var enemies_below_player = 0
+	var player_depth = player.global_position.y
+	if len(enemies) != 0:
+		for enemy in enemies:
+			if enemy.global_position.y > player.global_position.y:
+				enemies_below_player += 1
+	var number_of_additional_enemies = amount_of_enemies(depth) - enemies_below_player
+	if number_of_additional_enemies <= 0:
+		return
+	for _i in range(number_of_additional_enemies):
 		rng.randomize()
-		enemy_spawn(Vector2(rng.randf_range(LEFT_BARRIER, RIGHT_BARRIER), rng.randf_range(height * 100 + 500, height * 100 + 2000)))
+		enemy_spawn(depth, Vector2(rng.randf_range(LEFT_BARRIER, RIGHT_BARRIER), rng.randf_range(player_depth + 500, player_depth + 2500)))
 
 
-func coin_spawn_manager() -> void:
-	var nodes = get_tree().get_nodes_in_group("coin")
-	if len(nodes) > 1:
-		var nearest_node = nodes[0]
-		for node in nodes:
-			if node.global_position.distance_to(player.global_position) < nearest_node.global_position.distance_to(player.global_position):
-				nearest_node = node
-		if nearest_node.global_position.distance_to(player.global_position) < get_enemy_spacing():
-			return
-	for _i in range(amount_of_coins()):
+func coin_spawn_manager(depth : float) -> void:
+	var coins = get_tree().get_nodes_in_group("coin")
+	var coins_below_player = 0
+	var player_depth = player.global_position.y
+	if len(coins) != 0:
+		for coin in coins:
+			if coin.global_position.y > player.global_position.y:
+				coins_below_player += 1
+	var number_of_additional_coins = amount_of_coins(depth) - coins_below_player
+	if number_of_additional_coins <= 0:
+		return
+	for _i in range(number_of_additional_coins):
 		rng.randomize()
-		coin_spawn(Vector2(rng.randf_range(LEFT_BARRIER, RIGHT_BARRIER), rng.randf_range(height * 100 + 500, height * 100 + 2000)))
+		coin_spawn(depth, Vector2(rng.randf_range(LEFT_BARRIER, RIGHT_BARRIER), rng.randf_range(player_depth + 500, player_depth + 2500)))
 
 
-func _process(_delta):
-	height = max(0, player.global_position.y / 100.0)
-	get_node("CanvasLayer/VBoxContainer/HeightLabel").text = "%.1fm" % height
+func _process(_delta) -> void:
+	var depth := max(0, player.global_position.y / 100.0)
+	get_node("CanvasLayer/VBoxContainer/HeightLabel").text = "%.1fm" % depth
 	
-	coin_spawn_manager()
-	enemy_spawn_manager()
+	coin_spawn_manager(depth)
+	enemy_spawn_manager(depth)
 
 
-func _on_DestroyTimer_timeout():
+func _on_DestroyTimer_timeout() -> void:
 	destroy_nodes()
