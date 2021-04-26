@@ -38,6 +38,8 @@ const SAVE_FILEPATH := "user://upgrades.json"
 var levels := UpgradeLevels.new()
 var parts := Parts.new()
 var money: int = 0 setget _set_money
+var highscore := Score.new()
+var current_score := Score.new()
 
 func _ready() -> void:
 	var err := load_from_file()
@@ -51,6 +53,12 @@ func _exit_tree() -> void:
 	if err:
 		push_error("failed to save upgrade levels: %s" % err)
 
+func update_highscore() -> bool:
+	if current_score.depth > highscore.depth:
+		highscore = current_score
+		return true
+	return false
+
 func remove_money(amount: int) -> bool:
 	if money < amount:
 		return false
@@ -62,6 +70,7 @@ func save_to_file() -> int:
 	var content := to_json({
 		"levels": _obj2dict(levels),
 		"parts": _obj2dict(parts),
+		"highscore": _obj2dict(highscore),
 		"money": money,
 	})
 	var file := File.new()
@@ -87,9 +96,9 @@ func load_from_file() -> int:
 
 	_update_obj_from_dict(levels, content.get("levels", {}))
 	_update_obj_from_dict(parts, content.get("parts", {}))
+	_update_obj_from_dict(highscore, content.get("highscore", {}))
 	money = content.get("money", 0)
 	return OK
-
 
 static func _obj2dict(obj: Object) -> Dictionary:
 	var d := {}
@@ -105,7 +114,6 @@ static func _update_obj_from_dict(obj: Object, d: Dictionary) -> void:
 		if not prop.usage & PROPERTY_USAGE_SCRIPT_VARIABLE:
 			continue
 		obj.set(prop.name, d.get(prop.name, false))
-
 
 func _set_money(value: int) -> void:
 	assert(value > 0)
