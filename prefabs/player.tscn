@@ -134,7 +134,7 @@ drag_margin_bottom = 0.05
 scale = Vector2( 2, 2 )
 frames = SubResource( 19 )
 animation = "idle"
-frame = 4
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
