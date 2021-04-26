@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
-# Enemy controller
+# Bomber (enemy) controller
+
+const bullet := preload("res://prefabs/bullet.tscn")
 
 export (int) var idle_speed := 10
 export (int) var hunting_speed := 15
@@ -17,6 +19,7 @@ export (float) var bounce_rate = 50.0
 
 onready var sprite := $AnimatedSprite
 onready var health_bar := $Control/HealthBar
+onready var _cooldown_timer := $CooldownTimer
 
 var health : float = max_health
 var speed := idle_speed
@@ -27,6 +30,9 @@ var velocity := Vector2()
 
 var player : KinematicBody2D
 var is_hunting := false
+var player_detected := false
+var is_in_range := false
+var can_shoot := true
 
 var rng = RandomNumberGenerator.new()
 
@@ -36,9 +42,19 @@ func _ready():
 
 
 func hunting_velocity() -> Vector2:
-	var x_direction = player.global_position.x - self.global_position.x
-	var y_direction = player.global_position.y - self.global_position.y
-	return Vector2(x_direction, y_direction).normalized() * speed
+	var direction = player.global_position - self.global_position
+	
+	# Stay in a radius
+	var lower_radius = 200
+	var upper_radius = 250
+	
+	if (lower_radius < direction.length() and direction.length() < upper_radius):
+		direction = Vector2.ZERO
+		is_in_range = true
+	elif direction.length() < lower_radius:
+		direction *= -1
+	
+	return direction.normalized() * speed
 
 
 func calculate_velocity() -> Vector2:
@@ -67,11 +83,31 @@ func collision_control(collision) -> void:
 			sprite.set_flip_h(!sprite.flip_h)
 
 
+func shoot(dir : Vector2):
+	var new_bullet = bullet.instance()
+	new_bullet.position = self.global_position
+	get_tree().current_scene.add_child(new_bullet)
+	new_bullet.fire(dir)
+	_cooldown_timer.start()
+	can_shoot = false
+	
+
+
 func _physics_process(delta):
 	if is_hunting:
 		direction = hunting_velocity()
 	velocity = calculate_velocity()
-	rotate_enemy()
+	if player_detected:
+		if velocity.x < 0:
+			self.rotation = (player.global_position - self.global_position).angle() + PI
+			sprite.set_flip_h(true)
+		else:
+			self.rotation = (player.global_position - self.global_position).angle()
+			sprite.set_flip_h(false)
+	else:
+		rotate_enemy()
+	if can_shoot and is_in_range:
+		shoot(player.global_position - self.global_position)
 	health_bar.value = range_lerp(health, 0, max_health, 0, 100)
 	var collision = move_and_collide(velocity * speed * delta)
 	collision_control(collision)
@@ -100,6 +136,7 @@ func _on_PlayerDetectionArea_body_entered(body):
 		is_hunting = true
 		speed = hunting_speed
 		acceleration = hunting_acceleration
+		player_detected = true
 
 
 func _on_PlayerDetectionArea_body_exited(body):
@@ -107,7 +144,12 @@ func _on_PlayerDetectionArea_body_exited(body):
 		is_hunting = false
 		speed = idle_speed
 		acceleration = idle_acceleration
+		player_detected = false
 
 
 func _on_HealthBarTimer_timeout():
 	health_bar.visible = false
+
+
+func _on_CooldownTimer_timeout():
+	can_shoot = true
