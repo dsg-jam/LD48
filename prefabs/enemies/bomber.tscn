@@ -31,9 +31,8 @@ animations = [ {
 radius = 20.6965
 height = 7.48994
 
-[sub_resource type="CapsuleShape2D" id=7]
-radius = 173.0
-height = 438.0
+[sub_resource type="CircleShape2D" id=7]
+radius = 384.0
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.145098, 0.266667, 0.372549, 0.588235 )
@@ -54,7 +53,7 @@ script = ExtResource( 2 )
 position = Vector2( 8, 2 )
 scale = Vector2( 2.65625, 2.65625 )
 frames = SubResource( 5 )
-frame = 3
+frame = 1
 playing = true
 offset = Vector2( -3.01176, -0.752941 )
 
