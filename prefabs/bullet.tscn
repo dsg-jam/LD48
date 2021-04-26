@@ -21,12 +21,12 @@ color = Color( 0.701961, 0.807843, 1, 1 )
 hue_variation = -0.05
 hue_variation_random = 0.52
 
-[node name="Harpoon" type="KinematicBody2D" groups=[
+[node name="Bullet" type="KinematicBody2D" groups=[
+"bullet",
 "destroyable",
-"harpoon",
 ]]
-collision_layer = 8
-collision_mask = 11
+collision_layer = 0
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

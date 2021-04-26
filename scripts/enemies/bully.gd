@@ -17,6 +17,7 @@ export (float) var bounce_rate = 50.0
 
 onready var sprite := $AnimatedSprite
 onready var health_bar := $Control/HealthBar
+onready var _player_upgrades := get_node(@"/root/PlayerUpgrades")
 
 var health : float = max_health
 var speed := idle_speed
@@ -79,11 +80,14 @@ func _physics_process(delta):
 
 func reduce_health(amount: float) -> void:
 	health -= amount
-	# TODO hit and death animation
+	# TODO hit animation
 	health_bar.value = range_lerp(health, 0, max_health, 0, 100)
 	health_bar.visible = true
 	if health <= 0:
-		queue_free()
+		_player_upgrades.money += 3
+		health_bar.visible = false
+		sprite.animation = "death"
+		$DeathTimer.start()
 	if health/max_health > 0.3:
 		$HealthBarTimer.start()
 
@@ -111,3 +115,7 @@ func _on_PlayerDetectionArea_body_exited(body):
 
 func _on_HealthBarTimer_timeout():
 	health_bar.visible = false
+
+
+func _on_DeathTimer_timeout():
+	self.queue_free()
