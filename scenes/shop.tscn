@@ -69,18 +69,8 @@ margin_top = 22.0
 margin_right = 1178.0
 margin_bottom = 40.0
 upgrade_key = "hull_strength"
-upgrade_name = "Hull strength"
+upgrade_name = "Armor"
 price_start = 25
-price_end = 5000
-price_steps = 10
-
-[node name="FuelTankSize" parent="VBoxContainer/TabContainer/Upgrades/VBoxContainer" instance=ExtResource( 1 )]
-margin_top = 44.0
-margin_right = 1178.0
-margin_bottom = 62.0
-upgrade_key = "fuel_tank_size"
-upgrade_name = "Fuel tank size"
-price_start = 10
 price_end = 5000
 price_steps = 10
 
@@ -109,14 +99,6 @@ rect_pivot_offset = Vector2( -313.536, 170.173 )
 part_name = "Harpoon"
 part_key = "harpoon"
 part_price = 30
-
-[node name="Light" parent="VBoxContainer/TabContainer/Parts/GridContainer" instance=ExtResource( 2 )]
-margin_left = 66.0
-margin_right = 128.0
-rect_pivot_offset = Vector2( -313.536, 170.173 )
-part_name = "Light"
-part_key = "light"
-part_price = 50
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 margin_top = 493.0

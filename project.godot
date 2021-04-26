@@ -21,8 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="LD48"
-run/main_scene="res://scenes/playground.tscn"
-config/icon="res://assets/icon.png"
+run/main_scene="res://scenes/start.tscn"
 
 [autoload]
 
