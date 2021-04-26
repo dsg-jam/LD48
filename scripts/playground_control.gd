@@ -20,6 +20,7 @@ onready var _player_upgrades := get_node(@"/root/PlayerUpgrades")
 onready var _player_money_at_start: int = _player_upgrades.money
 
 func _ready() -> void:
+	_money_display.set_money_value(0, false)
 	var err = _player_upgrades.connect("money_changed", self, "_on_player_money_changed")
 	assert(!err)
 
@@ -31,7 +32,7 @@ func _exit_tree() -> void:
 
 func _process(_delta) -> void:
 	_player_depth = max(0, player.global_position.y / 100.0)
-	_label_height.text = "%.1fm" % _player_depth
+	_label_height.text = "%.1f m" % _player_depth
 	
 	coin_spawn_manager(_player_depth)
 	enemy_spawn_manager(_player_depth)

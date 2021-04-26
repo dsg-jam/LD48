@@ -316,17 +316,17 @@ margin_bottom = 26.0
 grow_horizontal = 0
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 559.408, -100.824 )
+position = Vector2( 656, 56 )
 prefab_harpoon = ExtResource( 8 )
 
 [node name="Camera2D" parent="Player" index="0"]
 limit_left = -470
-limit_top = -220
+limit_top = -300
 limit_right = 1388
 limit_smoothed = true
 
 [node name="AnimatedSprite" parent="Player" index="1"]
-frame = 1
+frame = 4
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 9 )
